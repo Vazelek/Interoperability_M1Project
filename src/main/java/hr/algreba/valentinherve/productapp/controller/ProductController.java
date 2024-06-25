@@ -1,5 +1,6 @@
 package hr.algreba.valentinherve.productapp.controller;
 
+import hr.algreba.valentinherve.productapp.domain.Product;
 import hr.algreba.valentinherve.productapp.dto.ProductDTO;
 import hr.algreba.valentinherve.productapp.service.ProductService;
 import org.springframework.http.HttpStatus;
@@ -31,22 +32,20 @@ public class ProductController {
                 );
     }
 
-//    @Secured("ROLE_ADMIN")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    @PostMapping
-//    public ProductDTO save(@Valid @RequestBody final HardwareCommand command){
-//        return productService.save(command)
-//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT, "Hardware with the same code already exists"));
-//    }
-//
-//    @Secured("ROLE_ADMIN")
-//    @PutMapping("{code}")
-//    public ProductDTO update(@PathVariable String code, @Valid @RequestBody final HardwareUpdateCommand updatedHardwareCommand){
-//        return productService.update(code, updatedHardwareCommand)
-//                .orElseThrow(
-//                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Hardware was not found by that code")
-//                );
-//    }
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public ProductDTO save(@RequestBody Product product){
+        return productService.save(product)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.CONFLICT, "Product with the same id already exists"));
+    }
+
+    @PutMapping("{id}")
+    public ProductDTO update(@PathVariable Long id, @RequestBody final Product updatedProduct){
+        return productService.update(id, updatedProduct)
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product was not found by that id")
+                );
+    }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("{id}")

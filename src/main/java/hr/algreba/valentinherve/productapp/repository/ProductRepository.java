@@ -11,7 +11,7 @@ public interface ProductRepository {
 
     Optional<Product> findById(Long id);
 
-    Optional<Product> save(Product hardware);
+    Optional<Product> save(Product product);
 
     Optional<Product> update(Long id, Product updatedProduct);
 

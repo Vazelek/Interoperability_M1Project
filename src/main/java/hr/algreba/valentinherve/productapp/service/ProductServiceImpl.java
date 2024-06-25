@@ -27,20 +27,20 @@ public class ProductServiceImpl implements ProductService {
     public Optional<ProductDTO> findById(Long id) {
         return productRepository.findById(id).map(ProductDTO::new);
     }
-//
-//    @Override
-//    public Optional<ProductDTO> save(ProductCommand productCommand) {
-//        return productRepository
-//                .save(new Product(productCommand))
-//                .map(ProductDTO::new);
-//    }
-//
-//    @Override
-//    public Optional<ProductDTO> update(Long id, ProductUpdateCommand updatedProductCommand) {
-//        return productRepository
-//                .update(id, new Product(updatedProductCommand))
-//                .map(product -> new ProductDTO(id, product));
-//    }
+
+    @Override
+    public Optional<ProductDTO> save(Product product) {
+        return productRepository
+                .save(new Product(product))
+                .map(ProductDTO::new);
+    }
+
+    @Override
+    public Optional<ProductDTO> update(Long id, Product updateProduct) {
+        return productRepository
+                .update(id, new Product(updateProduct))
+                .map(ProductDTO::new);
+    }
 
     @Transactional
     @Override

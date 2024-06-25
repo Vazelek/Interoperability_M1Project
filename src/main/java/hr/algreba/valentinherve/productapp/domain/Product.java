@@ -25,6 +25,13 @@ public class Product {
         this.price = price;
     }
 
+    public Product(Product updateProduct) {
+        this.id = updateProduct.getId();
+        this.name = updateProduct.getName();
+        this.stock = updateProduct.getStock();
+        this.price = updateProduct.getPrice();
+    }
+
     public Long getId() {
         return id;
     }
